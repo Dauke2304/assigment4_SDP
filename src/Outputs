@@ -45,3 +45,17 @@ Director approved the request of $15000.0 for New Office Setup
 Processing request 4:
 CEO approved the request of $50000.0 for Company Expansion Project
 
+#6
+Alice sends: Hello, everyone!
+Bob receives: Hello, everyone!
+Charlie (Premium) receives: Hello, everyone!
+Diana (Premium) receives: Hello, everyone!
+Charlie (Premium) sends: Hi Alice!
+Alice receives: Hi Alice!
+Bob receives: Hi Alice!
+Diana (Premium) receives: Hi Alice!
+Diana (Premium) sends: Good to see you all.
+Alice receives: Good to see you all.
+Bob receives: Good to see you all.
+Charlie (Premium) receives: Good to see you all.
+

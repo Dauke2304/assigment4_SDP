@@ -1,25 +1,24 @@
-import ChainOfResponsibility.*;
+import Mediator.*;
 public class Main {
     public static void main(String[] args) {
-        ApprovalChain approvalChain = new ApprovalChain();
+        // Create a chat room (mediator)
+        ChatMediator chatRoom = new ChatRoom();
 
-        // Create some expense requests
-        ExpenseRequest request1 = new ExpenseRequest(500, "Office Supplies");
-        ExpenseRequest request2 = new ExpenseRequest(3000, "Team Building Event");
-        ExpenseRequest request3 = new ExpenseRequest(15000, "New Office Setup");
-        ExpenseRequest request4 = new ExpenseRequest(50000, "Company Expansion Project");
+        // Create users
+        User user1 = new RegularUser(chatRoom, "Alice");
+        User user2 = new RegularUser(chatRoom, "Bob");
+        User user3 = new PremiumUser(chatRoom, "Charlie");
+        User user4 = new PremiumUser(chatRoom, "Diana");
 
-        // Process the requests through the chain
-        System.out.println("Processing request 1:");
-        approvalChain.processRequest(request1);
+        // Add users to the chat room
+        chatRoom.addUser(user1);
+        chatRoom.addUser(user2);
+        chatRoom.addUser(user3);
+        chatRoom.addUser(user4);
 
-        System.out.println("\nProcessing request 2:");
-        approvalChain.processRequest(request2);
-
-        System.out.println("\nProcessing request 3:");
-        approvalChain.processRequest(request3);
-
-        System.out.println("\nProcessing request 4:");
-        approvalChain.processRequest(request4);
+        // Users sending messages
+        user1.send("Hello, everyone!");
+        user3.send("Hi Alice!");
+        user4.send("Good to see you all.");
     }
 }
