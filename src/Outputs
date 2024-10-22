@@ -88,4 +88,21 @@ Generating HTML Report:
 <footer>HTML Report Footer</footer></body></html>
 
 #10
+Sequential Traversal:
+Captain by Myagi (Rap)
+F!ne by Travis Scott (Hip-hop)
+Starboy by Weeknd (Pop)
+Fly Me to the Moon by Frank (Jazz)
+Beggin by Maneskin (Rock)
+
+Shuffle Traversal:
+Captain by Myagi (Rap)
+Beggin by Maneskin (Rock)
+Fly Me to the Moon by Frank (Jazz)
+Starboy by Weeknd (Pop)
+F!ne by Travis Scott (Hip-hop)
+
+Rock Genre Filter Traversal:
+Beggin by Maneskin (Rock)
+
 

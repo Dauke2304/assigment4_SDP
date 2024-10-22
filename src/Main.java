@@ -1,20 +1,35 @@
-import TMP.*;
+import Iterator.*;
 public class Main {
     public static void main(String[] args) {
-        // Create instances of different report generators
-        ReportGenerator pdfReport = new PDFReportGenerator();
-        ReportGenerator htmlReport = new HTMLReportGenerator();
+        // Create a playlist and add songs
+        Playlist playlist = new Playlist();
+        playlist.addSong(new Song("Captain", "Myagi", "Rap"));
+        playlist.addSong(new Song("F!ne", "Travis Scott", "Hip-hop"));
+        playlist.addSong(new Song("Starboy", "Weeknd", "Pop"));
+        playlist.addSong(new Song("Fly Me to the Moon", "Frank", "Jazz"));
+        playlist.addSong(new Song("Beggin", "Maneskin", "Rock"));
 
-        // Create the reporting system
-        ReportingSystem reportingSystem = new ReportingSystem();
+        // Sequential traversal
+        System.out.println("Sequential Traversal:");
+        Iterator sequentialIterator = playlist.createSequentialIterator();
+        while (sequentialIterator.hasNext()) {
+            System.out.println(sequentialIterator.next());
+        }
 
-        // Generate reports in different formats
-        System.out.println("Generating PDF Report:");
-        reportingSystem.generate(pdfReport);
+        // Shuffle traversal
+        System.out.println("\nShuffle Traversal:");
+        Iterator shuffleIterator = playlist.createShuffleIterator();
+        while (shuffleIterator.hasNext()) {
+            System.out.println(shuffleIterator.next());
+        }
 
-        System.out.println("\nGenerating HTML Report:");
-        reportingSystem.generate(htmlReport);
-
+        // Genre filter traversal
+        System.out.println("\nRock Genre Filter Traversal:");
+        Iterator genreFilterIterator = playlist.createGenreFilterIterator("Rock");
+        while (genreFilterIterator.hasNext()) {
+            System.out.println(genreFilterIterator.next());
+        }
     }
 }
+
 
