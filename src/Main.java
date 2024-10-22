@@ -1,24 +1,32 @@
-import Mediator.*;
+import Memento.*;
 public class Main {
     public static void main(String[] args) {
-        // Create a chat room (mediator)
-        ChatMediator chatRoom = new ChatRoom();
+        // Create a document and version control system
+        Document document = new Document();
+        VersionControl versionControl = new VersionControl();
 
-        // Create users
-        User user1 = new RegularUser(chatRoom, "Alice");
-        User user2 = new RegularUser(chatRoom, "Bob");
-        User user3 = new PremiumUser(chatRoom, "Charlie");
-        User user4 = new PremiumUser(chatRoom, "Diana");
+        // Edit the document and save versions
+        document.setContent("Version 1: Initial content");
+        versionControl.saveVersion(document.save());  // Save version 1
 
-        // Add users to the chat room
-        chatRoom.addUser(user1);
-        chatRoom.addUser(user2);
-        chatRoom.addUser(user3);
-        chatRoom.addUser(user4);
+        document.setContent("Version 2: Added introduction");
+        versionControl.saveVersion(document.save());  // Save version 2
 
-        // Users sending messages
-        user1.send("Hello, everyone!");
-        user3.send("Hi Alice!");
-        user4.send("Good to see you all.");
+        document.setContent("Version 3: Added conclusion");
+        versionControl.saveVersion(document.save());  // Save version 3
+
+        // List all saved versions
+        System.out.println("Saved Versions:");
+        versionControl.listVersions();
+
+        // Restore a specific version
+        System.out.println("\nRestoring to Version 1:");
+        document.restore(versionControl.getVersion(0));
+        System.out.println("Current Content: " + document.getContent());
+
+        // Restore another version
+        System.out.println("\nRestoring to Version 3:");
+        document.restore(versionControl.getVersion(2));
+        System.out.println("Current Content: " + document.getContent());
     }
 }
