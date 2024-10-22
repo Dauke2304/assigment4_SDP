@@ -1,30 +1,25 @@
-import Command.*;
+import State.*;
 public class Main {
     public static void main(String[] args) {
-        RemoteControl remote = new RemoteControl();
+        Order order = new Order();
 
-        TV tv = new TV();
-        Stereo stereo = new Stereo();
-        Light light = new Light();
+        // Scenario 1: New order -> Pay -> Ship -> Deliver
+        System.out.println("=== Scenario 1: New -> Paid -> Shipped -> Delivered ===");
+        order.payOrder();     // Order has been paid
+        order.shipOrder();    // Order has been shipped
+        order.deliverOrder(); // Order has been delivered
 
-        TurnTVOn tvOn = new TurnTVOn(tv);
-        SetVolume stereoSetVolume = new SetVolume(stereo, 10);
-        DimLights dimLights = new DimLights(light, 50);
+        // Scenario 2: Trying to cancel a delivered order
+        System.out.println("\n=== Scenario 2: Try to cancel a delivered order ===");
+        order.cancelOrder();  // Cannot cancel a delivered order
 
-        remote.setCommand(0, tvOn, new NoCommand());  // Slot 0: TV On command
-        remote.setCommand(1, stereoSetVolume, new NoCommand());  // Slot 1: Set stereo volume
-        remote.setCommand(2, dimLights, new NoCommand());  // Slot 2: Dim Lights
+        // Scenario 3: New order -> Cancel
+        System.out.println("\n=== Scenario 3: New -> Cancel ===");
+        Order anotherOrder = new Order();
+        anotherOrder.cancelOrder();  // Order has been cancelled
 
-        // Execute commands
-        remote.onButtonWasPushed(0);  // Turn TV on
-        remote.onButtonWasPushed(1);  // Set stereo volume to 10
-        remote.onButtonWasPushed(2);  // Dim lights to 50%
-
-        // Undo last command (dim lights)
-        remote.undoButtonWasPushed();
-
-        // Test undo for stereo volume
-        remote.onButtonWasPushed(1);  // Set stereo volume again
-        remote.undoButtonWasPushed(); // Undo stereo volume change
+        // Scenario 4: Trying to pay a cancelled order
+        System.out.println("\n=== Scenario 4: Try to pay a cancelled order ===");
+        anotherOrder.payOrder();  // Cannot pay for a cancelled order
     }
 }
