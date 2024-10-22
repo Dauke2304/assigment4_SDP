@@ -1,22 +1,30 @@
-import Observer.*;
+import Command.*;
 public class Main {
     public static void main(String[] args) {
-        WeatherStation weatherStation = new WeatherStation();
+        RemoteControl remote = new RemoteControl();
 
-        CurrentConditionsDisplay currentDisplay = new CurrentConditionsDisplay();
-        StatisticsDisplay statisticsDisplay = new StatisticsDisplay();
-        ForecastDisplay forecastDisplay = new ForecastDisplay();
+        TV tv = new TV();
+        Stereo stereo = new Stereo();
+        Light light = new Light();
 
-        // Register displays to the weather station
-        weatherStation.addObserver(currentDisplay);
-        weatherStation.addObserver(statisticsDisplay);
-        weatherStation.addObserver(forecastDisplay);
+        TurnTVOn tvOn = new TurnTVOn(tv);
+        SetVolume stereoSetVolume = new SetVolume(stereo, 10);
+        DimLights dimLights = new DimLights(light, 50);
 
-        WeatherData weatherData = new WeatherData(weatherStation);
+        remote.setCommand(0, tvOn, new NoCommand());  // Slot 0: TV On command
+        remote.setCommand(1, stereoSetVolume, new NoCommand());  // Slot 1: Set stereo volume
+        remote.setCommand(2, dimLights, new NoCommand());  // Slot 2: Dim Lights
 
-        // Simulate weather data changes
-        weatherData.changeWeatherData(25.0, 65.0, 1013.5);
-        weatherData.changeWeatherData(22.0, 70.0, 1012.1);
-        weatherData.changeWeatherData(28.0, 90.0, 1011.0);
+        // Execute commands
+        remote.onButtonWasPushed(0);  // Turn TV on
+        remote.onButtonWasPushed(1);  // Set stereo volume to 10
+        remote.onButtonWasPushed(2);  // Dim lights to 50%
+
+        // Undo last command (dim lights)
+        remote.undoButtonWasPushed();
+
+        // Test undo for stereo volume
+        remote.onButtonWasPushed(1);  // Set stereo volume again
+        remote.undoButtonWasPushed(); // Undo stereo volume change
     }
 }
