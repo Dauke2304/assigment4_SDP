@@ -76,3 +76,16 @@ Area of Circle: 78.53981633974483
 Area of Rectangle: 28.0
 Area of Triangle: 9.0
 
+#9
+Generating PDF Report:
+PDF Report Header
+PDF Report Body
+PDF Report Footer
+
+Generating HTML Report:
+<html><head><title>HTML Report</title></head>
+<body><h1>HTML Report Body</h1>
+<footer>HTML Report Footer</footer></body></html>
+
+#10
+

@@ -1,22 +1,20 @@
-import Visitor.*;
+import TMP.*;
 public class Main {
     public static void main(String[] args) {
-        // Create shapes
-        Circle circle = new Circle(5);
-        Rectangle rectangle = new Rectangle(4, 7);
-        Triangle triangle = new Triangle(6, 3);
+        // Create instances of different report generators
+        ReportGenerator pdfReport = new PDFReportGenerator();
+        ReportGenerator htmlReport = new HTMLReportGenerator();
 
-        // Add shapes to drawing
-        Drawing drawing = new Drawing();
-        drawing.addShape(circle);
-        drawing.addShape(rectangle);
-        drawing.addShape(triangle);
+        // Create the reporting system
+        ReportingSystem reportingSystem = new ReportingSystem();
 
-        // Create an AreaCalculator visitor
-        Visitor areaCalculator = new AreaCalculator();
+        // Generate reports in different formats
+        System.out.println("Generating PDF Report:");
+        reportingSystem.generate(pdfReport);
 
-        // Calculate areas for all shapes in the drawing
-        drawing.calculateAreas(areaCalculator);
+        System.out.println("\nGenerating HTML Report:");
+        reportingSystem.generate(htmlReport);
+
     }
 }
 
