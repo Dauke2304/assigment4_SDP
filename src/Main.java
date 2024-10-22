@@ -1,25 +1,25 @@
-import State.*;
+import ChainOfResponsibility.*;
 public class Main {
     public static void main(String[] args) {
-        Order order = new Order();
+        ApprovalChain approvalChain = new ApprovalChain();
 
-        // Scenario 1: New order -> Pay -> Ship -> Deliver
-        System.out.println("=== Scenario 1: New -> Paid -> Shipped -> Delivered ===");
-        order.payOrder();     // Order has been paid
-        order.shipOrder();    // Order has been shipped
-        order.deliverOrder(); // Order has been delivered
+        // Create some expense requests
+        ExpenseRequest request1 = new ExpenseRequest(500, "Office Supplies");
+        ExpenseRequest request2 = new ExpenseRequest(3000, "Team Building Event");
+        ExpenseRequest request3 = new ExpenseRequest(15000, "New Office Setup");
+        ExpenseRequest request4 = new ExpenseRequest(50000, "Company Expansion Project");
 
-        // Scenario 2: Trying to cancel a delivered order
-        System.out.println("\n=== Scenario 2: Try to cancel a delivered order ===");
-        order.cancelOrder();  // Cannot cancel a delivered order
+        // Process the requests through the chain
+        System.out.println("Processing request 1:");
+        approvalChain.processRequest(request1);
 
-        // Scenario 3: New order -> Cancel
-        System.out.println("\n=== Scenario 3: New -> Cancel ===");
-        Order anotherOrder = new Order();
-        anotherOrder.cancelOrder();  // Order has been cancelled
+        System.out.println("\nProcessing request 2:");
+        approvalChain.processRequest(request2);
 
-        // Scenario 4: Trying to pay a cancelled order
-        System.out.println("\n=== Scenario 4: Try to pay a cancelled order ===");
-        anotherOrder.payOrder();  // Cannot pay for a cancelled order
+        System.out.println("\nProcessing request 3:");
+        approvalChain.processRequest(request3);
+
+        System.out.println("\nProcessing request 4:");
+        approvalChain.processRequest(request4);
     }
 }
