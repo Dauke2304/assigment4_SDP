@@ -1,21 +1,22 @@
-import Strategy.*;
+import Observer.*;
 public class Main {
     public static void main(String[] args) {
-        ShoppingCart cart = new ShoppingCart();
+        WeatherStation weatherStation = new WeatherStation();
 
-        // Process payment with Credit Card
-        PaymentStrategy creditCardPayment = new CreditCardPayment("1234-5678-9876-5432", "John Doe");
-        cart.setPaymentStrategy(creditCardPayment);
-        cart.checkout(150.00);  // Output: Processing credit card payment of $150.0 for cardholder: John Doe
+        CurrentConditionsDisplay currentDisplay = new CurrentConditionsDisplay();
+        StatisticsDisplay statisticsDisplay = new StatisticsDisplay();
+        ForecastDisplay forecastDisplay = new ForecastDisplay();
 
-        // Switch to PayPal payment
-        PaymentStrategy payPalPayment = new PayPalPayment("johndoe@example.com");
-        cart.setPaymentStrategy(payPalPayment);
-        cart.checkout(200.00);  // Output: Processing PayPal payment of $200.0 for email: johndoe@example.com
+        // Register displays to the weather station
+        weatherStation.addObserver(currentDisplay);
+        weatherStation.addObserver(statisticsDisplay);
+        weatherStation.addObserver(forecastDisplay);
 
-        // Switch to Cryptocurrency payment
-        PaymentStrategy cryptoPayment = new CryptoPayment("1A2b3C4D5E6F7G8H9I0J");
-        cart.setPaymentStrategy(cryptoPayment);
-        cart.checkout(300.00);  // Output: Processing cryptocurrency payment of $300.0 for wallet: 1A2b3C4D5E6F7G8H9I0J
+        WeatherData weatherData = new WeatherData(weatherStation);
+
+        // Simulate weather data changes
+        weatherData.changeWeatherData(25.0, 65.0, 1013.5);
+        weatherData.changeWeatherData(22.0, 70.0, 1012.1);
+        weatherData.changeWeatherData(28.0, 90.0, 1011.0);
     }
 }
